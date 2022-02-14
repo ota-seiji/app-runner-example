@@ -1,15 +1,17 @@
 FROM node:14-slim
 
-# Create app directory
 WORKDIR /usr/src/app
 
-# Install app dependencies
-COPY package*.json ./
+# https://github.com/prisma/prisma/issues/1301#issuecomment-574317426
+RUN apt-get -qy update
+RUN apt-get -qy install openssl
 
-RUN npm install
-
-# Bundle app source
 COPY . .
 
+RUN yarn install --pure-lockfile --non-interactive
+
+RUN yarn db:generate
+
 EXPOSE 3000
-CMD ["yarn", "start"]
+
+CMD sh -c "yarn db:migrate && yarn start"

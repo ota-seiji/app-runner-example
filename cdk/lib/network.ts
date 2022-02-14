@@ -36,7 +36,7 @@ export class Network extends cdk.Construct {
     })
     this.dbSecurityGroup.addIngressRule(
       AppRunnerSecurityGroup,
-      ec2.Port.tcp(3000)
+      ec2.Port.tcp(5432)
     )
   }
 }

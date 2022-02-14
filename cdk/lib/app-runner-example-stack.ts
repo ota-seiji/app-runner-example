@@ -9,9 +9,8 @@ export class AppRunnerExampleStack extends cdk.Stack {
     super(scope, id, props)
 
     // ECR
-    const repository = new ecr.Repository(this, 'AppRunnerExampleRepository', {
-      imageScanOnPush: true,
-    })
+    const repository = new ecr.Repository(this, 'AppRunnerExampleRepository')
+
     // VPC
     const { vpc, dbSecurityGroup } = new Network(this, 'Network')
 

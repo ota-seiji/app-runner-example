@@ -29,8 +29,6 @@ export class AppRunner extends cdk.Construct {
       'AppRunnerExampleDbSecret'
     )
 
-    secret.secretValueFromJson('username').toString()
-
     // Apprunner
     new apprunner.Service(scope, 'AppRunnerExampleService', {
       source: apprunner.Source.fromEcr({
